@@ -1,0 +1,14 @@
+{
+  "singleQuote": true,
+  "printWidth": 80,
+  "bracketSameLine": false,
+  "bracketSpacing": false,
+  "overrides": [
+    {
+      "files": "*.css",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}
