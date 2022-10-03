@@ -7,7 +7,7 @@
 /bazel-out
 
 # Firebase
-.firebase
+.firebase/
 
 # Node
 /node_modules
