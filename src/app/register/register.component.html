@@ -1,1 +1,31 @@
-<p>register works!</p>
+<form class="flex justify-content-center">
+  <div class="p-4 w-full lg:w-4">
+    <div class="text-center mb-5">
+      <div class="text-900 text-3xl font-medium mb-3">Register</div>
+      <span class="text-600 font-medium line-height-3">Already have an account?</span>
+      <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Sign In</a>
+    </div>
+
+    <div>
+      <button pButton pRipple label="Register with Google" icon="pi pi-google" class="w-full mt-2"></button>
+      <button pButton pRipple label="Register with Facebook" icon="pi pi-facebook" class="w-full mt-2"></button>
+
+      <p class="text-center">or</p>
+
+      <label for="name" class="block text-900 font-medium mb-2">Name</label>
+      <input id="name" type="text" pInputText class="w-full mb-3">
+
+      <label for="email" class="block text-900 font-medium mb-2">Email</label>
+      <input id="email" type="text" pInputText class="w-full mb-3">
+
+      <label for="password" class="block text-900 font-medium mb-2">Password</label>
+      <input id="password" type="password" pInputText class="w-full mb-3">
+
+      <label for="passwordRepeat" class="block text-900 font-medium mb-2">Repeat password</label>
+      <input id="passwordRepeat" type="password" pInputText class="w-full mb-3">
+
+      <button pButton pRipple label="Register with Email" icon="pi pi-user" class="w-full"></button>
+    </div>
+  </div>
+</form>
+
