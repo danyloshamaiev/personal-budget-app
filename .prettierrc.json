@@ -3,6 +3,7 @@
   "printWidth": 80,
   "bracketSameLine": false,
   "bracketSpacing": false,
+  "semi": true,
   "overrides": [
     {
       "files": "*.css",
