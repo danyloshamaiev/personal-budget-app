@@ -1,2 +1,9 @@
 @import '~normalize.css';
 @import 'theme.css';
+
+/* Assess PrimeNG to use correct values for body */
+body {
+  background-color: var(--surface-a);
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
