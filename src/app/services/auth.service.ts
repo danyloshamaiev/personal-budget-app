@@ -14,7 +14,6 @@ import {
   Firestore,
   collection,
   CollectionReference,
-  DocumentData,
   DocumentReference,
   doc,
   setDoc,
@@ -29,7 +28,7 @@ import {ActivatedRoute, NavigationEnd} from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private usersCollection: CollectionReference<DocumentData>;
+  private usersCollection: CollectionReference;
   public isAuthenticated$: Observable<boolean>;
   public isAuthenticatedWithDelay$: Observable<boolean>;
   private redirect = false;
@@ -75,27 +74,6 @@ export class AuthService {
       .catch((error) => {
         throw new Error(error.message);
       });
-  }
-
-  public async createUser(userData: IUser) {
-    if (!userData.password) throw new Error(`Password not provided!`);
-
-    const userCred = await createUserWithEmailAndPassword(
-      this.auth,
-      userData.email,
-      userData.password
-    );
-
-    if (!userCred.user) throw new Error(`User can't be found`);
-
-    // await this.usersCollection.doc(userCred.user.uid).set({
-    //   displayName: userData.displayName,
-    //   email: userData.email,
-    // });
-
-    // await userCred.user.updateProfile({
-    //   displayName: userData.displayName,
-    // });
   }
 
   public async logout($event?: Event) {
