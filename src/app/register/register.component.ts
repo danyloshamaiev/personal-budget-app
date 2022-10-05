@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 
 @Component({
@@ -7,15 +8,19 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   signUpWithGoogle(): void {
-    this.authService.signInWithGoogle();
+    this.authService
+      .signInWithGoogle()
+      .then(() => this.router.navigate(['accounts']));
   }
 
   signUpWithFacebook(): void {
-    this.authService.signInWithFacebook();
+    this.authService
+      .signInWithFacebook()
+      .then(() => this.router.navigate(['accounts']));
   }
 }

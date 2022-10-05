@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 
 @Component({
@@ -10,7 +11,7 @@ import {AuthService} from '../services/auth.service';
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),
@@ -27,10 +28,14 @@ export class LoginComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
-    this.authService.signInWithGoogle();
+    this.authService
+      .signInWithGoogle()
+      .then(() => this.router.navigate(['accounts']));
   }
 
   signInWithFacebook(): void {
-    this.authService.signInWithFacebook();
+    this.authService
+      .signInWithFacebook()
+      .then(() => this.router.navigate(['accounts']));
   }
 }
