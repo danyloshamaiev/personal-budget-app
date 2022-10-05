@@ -7,8 +7,24 @@
     </div>
 
     <div>
-      <button pButton pRipple label="Register with Google" icon="pi pi-google" class="w-full mt-2"></button>
-      <button pButton pRipple label="Register with Facebook" icon="pi pi-facebook" class="w-full mt-2"></button>
+      <button
+        pButton
+        pRipple
+        label="Register with Google"
+        icon="pi pi-google"
+        class="w-full mt-2"
+        (click)="signUpWithGoogle()"
+        type="button"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="Register with Facebook"
+        icon="pi pi-facebook"
+        class="w-full mt-2"
+        (click)="signUpWithFacebook()"
+        type="button"
+      ></button>
 
       <p class="text-center">or</p>
 
