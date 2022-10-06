@@ -10,7 +10,7 @@ deploy_production:
   only:
     - main
   script:
-    - npm install -g firebase-tools
+    - npm install -g firebase-tools@11.13.0
     - npm install
     - npm run build
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_TOKEN
