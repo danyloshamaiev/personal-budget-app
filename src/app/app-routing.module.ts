@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
-import {AuthGuard} from '@angular/fire/auth-guard';
+import {AuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 import {RouterModule, Routes} from '@angular/router';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   {
@@ -8,17 +10,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./settings/settings.module').then((m) => m.SettingsModule),
     canActivate: [AuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin},
   },
   {
     path: 'accounts',
     loadChildren: () =>
       import('./accounts/accounts.module').then((m) => m.AccountsModule),
     canActivate: [AuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin},
   },
   {
     path: 'cash',
     loadChildren: () => import('./cash/cash.module').then((m) => m.CashModule),
     canActivate: [AuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin},
   },
   {
     path: 'login',
