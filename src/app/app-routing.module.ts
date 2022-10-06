@@ -30,6 +30,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./register/register.module').then((m) => m.RegisterModule),
   },
+  {
+    path: '',
+    redirectTo: '/accounts',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
