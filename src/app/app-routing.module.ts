@@ -20,12 +20,6 @@ const routes: Routes = [
     data: {authGuardPipe: redirectUnauthorizedToLogin},
   },
   {
-    path: 'cash',
-    loadChildren: () => import('./cash/cash.module').then((m) => m.CashModule),
-    canActivate: [AuthGuard],
-    data: {authGuardPipe: redirectUnauthorizedToLogin},
-  },
-  {
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),

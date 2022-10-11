@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AccountsService} from '../services/accounts.service';
 
 @Component({
   selector: 'app-accounts',
@@ -6,7 +7,13 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./accounts.component.css'],
 })
 export class AccountsComponent implements OnInit {
-  constructor() {}
+  constructor(private accountsService: AccountsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.accountsService
+      .getUserAccounts('xDyp1q5wGHNWlVoAEMD20XFKGsW2')
+      .subscribe((accounts) => {
+        console.log(accounts);
+      });
+  }
 }
