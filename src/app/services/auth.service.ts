@@ -10,6 +10,7 @@ import {
   signOut,
   authState,
   UserCredential,
+  User,
 } from '@angular/fire/auth';
 import {
   Firestore,
@@ -30,9 +31,10 @@ import {ActivatedRoute, NavigationEnd} from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private usersCollection: CollectionReference;
+  public user$: Observable<User | null>;
   public isAuthenticated$: Observable<boolean>;
   public isAuthenticatedWithDelay$: Observable<boolean>;
+  private usersCollection: CollectionReference;
   private redirect = false;
 
   constructor(
@@ -42,8 +44,9 @@ export class AuthService {
     private route: ActivatedRoute,
     private messageService: MessageService
   ) {
+    this.user$ = user(this.auth);
     this.usersCollection = collection(this.db, 'users');
-    this.isAuthenticated$ = user(this.auth).pipe(map((user) => !!user));
+    this.isAuthenticated$ = this.user$.pipe(map((user) => !!user));
     this.isAuthenticatedWithDelay$ = this.isAuthenticated$.pipe(delay(1000));
     this.router.events
       .pipe(

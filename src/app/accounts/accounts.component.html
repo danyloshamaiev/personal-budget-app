@@ -1,1 +1,12 @@
-<p>accounts works!</p>
+<div class="flex justify-content-center">
+  <div class="p-4 w-full lg:w-4">
+    <div class="p-card" *ngFor="let account of accounts" (click)="openAccount(account.id)">
+      <div class="p-card-header p-2">
+        {{account.name}}
+      </div>
+      <div class="p-card-content px-2">
+        {{account.balance}}
+      </div>
+    </div>
+  </div>
+</div>
