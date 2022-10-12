@@ -39,24 +39,10 @@ export class LoginComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
-    this.authService.signInWithGoogle().then(() => {
-      this.router.navigate(['accounts']);
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'You have successfully logged in with Google account',
-      });
-    });
+    this.authService.signInWithGoogle();
   }
 
   signInWithFacebook(): void {
-    this.authService.signInWithFacebook().then(() => {
-      this.router.navigate(['accounts']);
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'You have successfully logged in with Facebook account',
-      });
-    });
+    this.authService.signInWithFacebook();
   }
 }
