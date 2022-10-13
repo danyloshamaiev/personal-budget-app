@@ -5,6 +5,7 @@ import {
   DocumentReference,
   Firestore,
   getDoc,
+  increment,
   setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
@@ -29,6 +30,17 @@ export class AccountsService {
     );
   }
 
+  public getUserTotalBalance(): Observable<any> {
+    return this.authService.user$.pipe(
+      concatMap((user) => {
+        const userRef: DocumentReference = doc(this.db, `users/${user?.uid}`);
+        return from(getDoc(userRef)).pipe(
+          map((userSnapshot) => userSnapshot.get('totalBalance'))
+        );
+      })
+    );
+  }
+
   public addUserAccount(name: string, initialBalance: number): Observable<any> {
     return this.authService.user$.pipe(
       concatMap((user) => {
@@ -43,6 +55,12 @@ export class AccountsService {
               balance: initialBalance,
             })
           )
+        ).pipe(
+          concatMap(() => {
+            return from(
+              updateDoc(userRef, 'totalBalance', increment(initialBalance))
+            );
+          })
         );
       })
     );

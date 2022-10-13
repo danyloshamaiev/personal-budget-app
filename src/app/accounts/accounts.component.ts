@@ -11,6 +11,7 @@ import {AccountsService} from '../services/accounts.service';
 })
 export class AccountsComponent implements OnInit, OnDestroy {
   public accounts!: IAccount[];
+  public balance: number;
   private unsubscribe$: Subject<void>;
 
   constructor(
@@ -18,6 +19,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.unsubscribe$ = new Subject<void>();
+    this.balance = 0;
   }
 
   ngOnInit(): void {
@@ -26,6 +28,12 @@ export class AccountsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((accounts: IAccount[] | null) => {
         if (!!accounts) this.accounts = accounts;
+      });
+    this.accountsService
+      .getUserTotalBalance()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((balance: number | null) => {
+        if (!!balance) this.balance = balance;
       });
   }
 
