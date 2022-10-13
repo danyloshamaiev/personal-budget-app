@@ -26,6 +26,7 @@ import IUser from '../models/user.model';
 import {delay, map, filter, switchMap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {ActivatedRoute, NavigationEnd} from '@angular/router';
+import {ToastService} from './toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +43,7 @@ export class AuthService {
     private db: Firestore,
     private router: Router,
     private route: ActivatedRoute,
-    private messageService: MessageService
+    private toast: ToastService
   ) {
     this.user$ = user(this.auth);
     this.usersCollection = collection(this.db, 'users');
@@ -63,9 +64,7 @@ export class AuthService {
     return signInWithPopup(this.auth, new GoogleAuthProvider())
       .then((result) => {
         this.handleAuthSuccess(result);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
+        this.toast.success({
           detail: 'You have successfully logged in with Google account',
         });
       })
@@ -78,9 +77,7 @@ export class AuthService {
     return signInWithPopup(this.auth, new FacebookAuthProvider())
       .then((result) => {
         this.handleAuthSuccess(result);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
+        this.toast.success({
           detail: 'You have successfully logged in with Facebook account',
         });
       })
@@ -93,9 +90,7 @@ export class AuthService {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((result) => {
         this.handleAuthSuccess(result);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
+        this.toast.success({
           detail: 'You have successfully logged in',
         });
       })
