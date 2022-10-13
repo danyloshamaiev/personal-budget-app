@@ -34,7 +34,11 @@ export class AccountsComponent implements OnInit, OnDestroy {
     this.unsubscribe$.unsubscribe();
   }
 
-  public openAccount(account: string) {
-    this.router.navigate([account]);
+  public openAccount(account: string): void {
+    this.router.navigate(['accounts', account]);
+  }
+
+  public addAccount(): void {
+    this.router.navigate(['accounts', 'new']);
   }
 }
