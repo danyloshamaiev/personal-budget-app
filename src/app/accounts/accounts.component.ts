@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Subject, takeUntil} from 'rxjs';
+import {Observable, Subject, takeUntil} from 'rxjs';
 import {IAccount} from '../models/account.model';
 import {AccountsService} from '../services/accounts.service';
 
@@ -10,8 +10,8 @@ import {AccountsService} from '../services/accounts.service';
   styleUrls: ['./accounts.component.css'],
 })
 export class AccountsComponent implements OnInit, OnDestroy {
-  public accounts!: IAccount[];
-  public balance: number;
+  public accounts$: Observable<IAccount[]>;
+  public balance$: Observable<number>;
   private unsubscribe$: Subject<void>;
 
   constructor(
@@ -19,23 +19,15 @@ export class AccountsComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.unsubscribe$ = new Subject<void>();
-    this.balance = 0;
+    this.accounts$ = this.accountsService
+      .getUserAccounts()
+      .pipe(takeUntil(this.unsubscribe$));
+    this.balance$ = this.accountsService
+      .getUserTotalBalance()
+      .pipe(takeUntil(this.unsubscribe$));
   }
 
-  ngOnInit(): void {
-    this.accountsService
-      .getUserAccounts()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((accounts: IAccount[] | null) => {
-        if (!!accounts) this.accounts = accounts;
-      });
-    this.accountsService
-      .getUserTotalBalance()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((balance: number | null) => {
-        if (!!balance) this.balance = balance;
-      });
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();

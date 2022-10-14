@@ -5,7 +5,9 @@ import {getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MessageService} from 'primeng/api';
+import {ButtonModule} from 'primeng/button';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import {RippleModule} from 'primeng/ripple';
 import {ToastModule} from 'primeng/toast';
 import {environment} from '../environments/environment';
 
@@ -23,6 +25,8 @@ import {AppComponent} from './app.component';
     provideAuth(() => getAuth()),
     ToastModule,
     InputSwitchModule,
+    ButtonModule,
+    RippleModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],

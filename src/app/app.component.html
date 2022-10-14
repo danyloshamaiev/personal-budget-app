@@ -1,3 +1,6 @@
-<p-inputSwitch (onChange)="switchDarkMode()"></p-inputSwitch>
+<div class="p-2">
+  <p-inputSwitch (onChange)="switchDarkMode()"></p-inputSwitch>
+  <button pButton pRipple (click)="logout($event)">Logout</button>
+</div>
 <router-outlet></router-outlet>
 <p-toast position="bottom-center"></p-toast>

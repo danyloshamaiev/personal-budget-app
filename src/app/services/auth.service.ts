@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {
   Auth,
   GoogleAuthProvider,
@@ -20,8 +20,7 @@ import {
   doc,
   setDoc,
 } from '@angular/fire/firestore';
-import {MessageService} from 'primeng/api';
-import {Observable, of} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 import IUser from '../models/user.model';
 import {delay, map, filter, switchMap} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -53,7 +52,7 @@ export class AuthService {
       .pipe(
         filter((e) => e instanceof NavigationEnd),
         map((e) => this.route.firstChild),
-        switchMap((route) => route?.data ?? of({}))
+        switchMap((route) => route?.data ?? EMPTY)
       )
       .subscribe((data) => {
         this.redirect = data['authOnly'] ?? false;

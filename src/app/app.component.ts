@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PrimeNGConfig} from 'primeng/api';
+import {AuthService} from './services/auth.service';
 import {ThemeService} from './services/theme.service';
 
 @Component({
@@ -9,7 +10,8 @@ import {ThemeService} from './services/theme.service';
 export class AppComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -18,5 +20,9 @@ export class AppComponent implements OnInit {
 
   switchDarkMode() {
     this.themeService.switchDarkMode();
+  }
+
+  logout($event: Event) {
+    this.authService.logout($event);
   }
 }
