@@ -1,6 +1,11 @@
 <div class="p-2">
   <p-inputSwitch (onChange)="switchDarkMode()"></p-inputSwitch>
-  <button pButton pRipple (click)="logout($event)">Logout</button>
+  <button
+    pButton
+    pRipple
+    (click)="logout($event)"
+    [class.hidden]="!(isAuthenticated$ | async)"
+  >Logout</button>
 </div>
 <router-outlet></router-outlet>
 <p-toast position="bottom-center"></p-toast>
