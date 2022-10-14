@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
+import {CalendarModule} from 'primeng/calendar';
 import {InputTextModule} from 'primeng/inputtext';
 import {RippleModule} from 'primeng/ripple';
 
@@ -18,6 +19,7 @@ import {NewTransactionComponent} from './new-transaction/new-transaction.compone
     RippleModule,
     InputTextModule,
     ReactiveFormsModule,
+    CalendarModule,
   ],
 })
 export class TransactionsModule {}
