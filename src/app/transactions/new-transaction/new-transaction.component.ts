@@ -18,8 +18,12 @@ export class NewTransactionComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.newTransactionForm = new FormGroup({
-      name: new FormControl(''),
-      initialBalance: new FormControl<number | null>(null),
+      account: new FormControl(''),
+      category: new FormControl(''),
+      description: new FormControl(''),
+      date: new FormControl(''),
+      notes: new FormControl(''),
+      sum: new FormControl<number>(0),
     });
     this.unsubscribe$ = new Subject<void>();
   }
@@ -33,10 +37,10 @@ export class NewTransactionComponent implements OnInit, OnDestroy {
 
   public addNewTransaction(): void {
     this.accountsService
-      .addUserAccount(
-        this.newTransactionForm.value.name,
-        this.newTransactionForm.value.initialBalance
-      )
+      .addUserTransaction({
+        ...this.newTransactionForm.value,
+        sum: +this.newTransactionForm.value.sum,
+      })
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
         this.router.navigate(['accounts']);

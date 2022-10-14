@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {
+  addDoc,
   arrayUnion,
   collection,
   collectionData,
@@ -14,6 +15,7 @@ import {
 } from '@angular/fire/firestore';
 import {concatMap, from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {ITransaction} from '../models/transaction.model';
 import {AuthService} from './auth.service';
 
 @Injectable({
@@ -49,6 +51,44 @@ export class AccountsService {
     );
   }
 
+  public addUserTransaction(
+    transaction: Partial<ITransaction>
+  ): Observable<any> {
+    return this.authService.user$.pipe(
+      concatMap((user) => {
+        const userRef: DocumentReference = doc(this.db, `users/${user?.uid}`);
+        return from(
+          addDoc(collection(this.db, 'transactions'), {
+            ...transaction,
+            uid: user?.uid,
+          })
+        )
+          .pipe(
+            concatMap(() => {
+              return from(
+                updateDoc(
+                  userRef,
+                  'totalBalance',
+                  increment(transaction.sum ?? 0)
+                )
+              );
+            })
+          )
+          .pipe(
+            concatMap(async () => {
+              const userDoc = await getDoc(userRef);
+              const accounts = userDoc.get('accounts');
+              const index = accounts.findIndex(
+                (element: any) => element.id == transaction.account
+              );
+              accounts[index].balance += +(transaction.sum ?? 0);
+              return from(updateDoc(userRef, 'accounts', accounts));
+            })
+          );
+      })
+    );
+  }
+
   public getUserTotalBalance(): Observable<any> {
     return this.authService.user$.pipe(
       concatMap((user) => {
@@ -71,7 +111,7 @@ export class AccountsService {
             arrayUnion({
               name,
               id: name, // TODO: CHANGE
-              balance: initialBalance,
+              balance: +initialBalance,
             })
           )
         ).pipe(

@@ -35,7 +35,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
   }
 
   public openAccount(account: string): void {
-    this.router.navigate(['accounts', account]);
+    this.router.navigate(['transactions', account]);
   }
 
   public addAccount(): void {
