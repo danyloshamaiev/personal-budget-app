@@ -1,13 +1,16 @@
 import {Injectable} from '@angular/core';
 import {
   arrayUnion,
+  collection,
+  collectionData,
   doc,
   DocumentReference,
   Firestore,
   getDoc,
   increment,
-  setDoc,
+  query,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import {concatMap, from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -25,6 +28,22 @@ export class AccountsService {
         const userRef: DocumentReference = doc(this.db, `users/${user?.uid}`);
         return from(getDoc(userRef)).pipe(
           map((userSnapshot) => userSnapshot.get('accounts'))
+        );
+      })
+    );
+  }
+
+  public getUserTransactions(accountID: string): Observable<any> {
+    return this.authService.user$.pipe(
+      concatMap((user) => {
+        return from(
+          collectionData(
+            query(
+              collection(this.db, 'transactions'),
+              where('uid', '==', user?.uid),
+              where('account', '==', accountID)
+            )
+          )
         );
       })
     );

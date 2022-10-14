@@ -1,0 +1,19 @@
+<div class="flex justify-content-center">
+  <div class="p-4 w-full lg:w-4">
+<!--    <div class="text-center">-->
+<!--      <h6>BALANCE</h6>-->
+<!--      <h2>{{balance$ | async}}</h2>-->
+<!--    </div>-->
+    <button pButton pRipple icon="pi pi-plus" (click)="addTransaction()" class="w-full">
+      Add Transaction
+    </button>
+    <div class="p-card my-2" *ngFor="let transaction of transactions$ | async">
+      <div class="p-card-header p-2">
+        {{transaction.description}}
+      </div>
+      <div class="p-card-content px-2">
+        {{transaction.sum}}
+      </div>
+    </div>
+  </div>
+</div>

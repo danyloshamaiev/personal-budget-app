@@ -6,18 +6,18 @@ import {AccountsService} from '../../services/accounts.service';
 
 @Component({
   selector: 'app-new-transaction',
-  templateUrl: './new-account.component.html',
-  styleUrls: ['./new-account.component.css'],
+  templateUrl: './new-transaction.component.html',
+  styleUrls: ['./new-transaction.component.css'],
 })
-export class NewAccountComponent implements OnInit, OnDestroy {
-  public newAccountForm: FormGroup;
+export class NewTransactionComponent implements OnInit, OnDestroy {
+  public newTransactionForm: FormGroup;
   private unsubscribe$: Subject<void>;
 
   constructor(
     private accountsService: AccountsService,
     private router: Router
   ) {
-    this.newAccountForm = new FormGroup({
+    this.newTransactionForm = new FormGroup({
       name: new FormControl(''),
       initialBalance: new FormControl<number | null>(null),
     });
@@ -31,11 +31,11 @@ export class NewAccountComponent implements OnInit, OnDestroy {
     this.unsubscribe$.unsubscribe();
   }
 
-  public addNewAccount(): void {
+  public addNewTransaction(): void {
     this.accountsService
       .addUserAccount(
-        this.newAccountForm.value.name,
-        this.newAccountForm.value.initialBalance
+        this.newTransactionForm.value.name,
+        this.newTransactionForm.value.initialBalance
       )
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {

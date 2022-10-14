@@ -20,6 +20,15 @@ const routes: Routes = [
     data: {authGuardPipe: redirectUnauthorizedToLogin},
   },
   {
+    path: 'transactions',
+    loadChildren: () =>
+      import('./transactions/transactions.module').then(
+        (m) => m.TransactionsModule
+      ),
+    canActivate: [AuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin},
+  },
+  {
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),
