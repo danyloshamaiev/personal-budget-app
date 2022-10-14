@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subject, takeUntil} from 'rxjs';
 import {ITransaction} from '../models/transaction.model';
 import {AccountsService} from '../services/accounts.service';
@@ -10,17 +10,20 @@ import {AccountsService} from '../services/accounts.service';
   styleUrls: ['./transactions.component.css'],
 })
 export class TransactionsComponent implements OnInit, OnDestroy {
-  public transactions$: Observable<ITransaction[]>;
+  public transactions$: Observable<ITransaction[]> | undefined;
   private unsubscribe$: Subject<void>;
 
   constructor(
     private accountsService: AccountsService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.unsubscribe$ = new Subject<void>();
-    this.transactions$ = this.accountsService
-      .getUserTransactions('test')
-      .pipe(takeUntil(this.unsubscribe$));
+    this.activatedRoute.params.subscribe((params) => {
+      this.transactions$ = this.accountsService
+        .getUserTransactions(params['id'])
+        .pipe(takeUntil(this.unsubscribe$));
+    });
   }
 
   ngOnInit(): void {}
