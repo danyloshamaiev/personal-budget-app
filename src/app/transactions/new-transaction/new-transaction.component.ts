@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Subject, takeUntil} from 'rxjs';
+import {Observable, Subject, takeUntil} from 'rxjs';
+import {IAccount} from '../../models/account.model';
 import {AccountsService} from '../../services/accounts.service';
 
 @Component({
@@ -11,6 +12,7 @@ import {AccountsService} from '../../services/accounts.service';
 })
 export class NewTransactionComponent implements OnInit, OnDestroy {
   public newTransactionForm: FormGroup;
+  public accounts$: Observable<IAccount[]>;
   private unsubscribe$: Subject<void>;
 
   constructor(
@@ -21,10 +23,11 @@ export class NewTransactionComponent implements OnInit, OnDestroy {
       account: new FormControl(''),
       category: new FormControl(''),
       description: new FormControl(''),
-      date: new FormControl(''),
+      date: new FormControl<Date>(new Date()),
       notes: new FormControl(''),
       sum: new FormControl<number>(0),
     });
+    this.accounts$ = this.accountsService.getUserAccounts();
     this.unsubscribe$ = new Subject<void>();
   }
 

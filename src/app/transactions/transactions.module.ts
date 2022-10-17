@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {CalendarModule} from 'primeng/calendar';
+import {DropdownModule} from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
 import {RippleModule} from 'primeng/ripple';
 
@@ -20,6 +21,7 @@ import {NewTransactionComponent} from './new-transaction/new-transaction.compone
     InputTextModule,
     ReactiveFormsModule,
     CalendarModule,
+    DropdownModule,
   ],
 })
 export class TransactionsModule {}
