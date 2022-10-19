@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Observable, Subject} from 'rxjs';
+import {Observable, Subject, take} from 'rxjs';
 import IUser from '../models/user.model';
 import {SettingsService} from '../services/settings.service';
 import {ThemeService} from '../services/theme.service';
+import {ToastService} from '../services/toast.service';
 
 @Component({
   selector: 'app-settings',
@@ -13,27 +14,30 @@ import {ThemeService} from '../services/theme.service';
 })
 export class SettingsComponent implements OnInit {
   public settingsForm: FormGroup;
-  public userInfo$: Observable<IUser>;
   public darkMode$: Observable<boolean>;
   private unsubscribe$: Subject<void>;
 
   constructor(
     private settingsService: SettingsService,
     private themeService: ThemeService,
-    private router: Router
+    private router: Router,
+    private toast: ToastService
   ) {
     this.settingsForm = new FormGroup({
       displayName: new FormControl(''),
       currency: new FormControl(''),
     });
-    this.userInfo$ = this.settingsService.getUserInfo();
+    this.settingsService
+      .getUserInfo()
+      .pipe(take(1))
+      .subscribe(({displayName, currency}) => {
+        this.settingsForm.patchValue({displayName, currency});
+      });
     this.darkMode$ = this.themeService.darkMode$;
     this.unsubscribe$ = new Subject<void>();
   }
 
-  public ngOnInit(): void {
-    this.userInfo$.subscribe((value) => console.log(value));
-  }
+  public ngOnInit(): void {}
 
   public ngOnDestroy(): void {
     this.unsubscribe$.next();
@@ -41,7 +45,11 @@ export class SettingsComponent implements OnInit {
   }
 
   public saveSettings(): void {
-    // this.settingsService.saveUserSettings();
+    this.settingsService
+      .updateUserInfo(this.settingsForm.value)
+      .subscribe(() => {
+        this.toast.success({detail: 'Settings saved successfully'});
+      });
   }
 
   public setDarkMode({checked}: {checked: boolean}) {

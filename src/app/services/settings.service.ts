@@ -4,6 +4,7 @@ import {
   DocumentReference,
   Firestore,
   getDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import {concatMap, from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -23,6 +24,15 @@ export class SettingsService {
         return from(getDoc(userRef)).pipe(
           map((userSnapshot) => userSnapshot.data() as IUser)
         );
+      })
+    );
+  }
+
+  public updateUserInfo(userInfo: Partial<IUser>): Observable<any> {
+    return this.authService.user$.pipe(
+      concatMap((user) => {
+        const userRef: DocumentReference = doc(this.db, `users/${user?.uid}`);
+        return from(updateDoc(userRef, userInfo));
       })
     );
   }
