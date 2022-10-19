@@ -1,1 +1,41 @@
-<p>settings works!</p>
+<form
+  [formGroup]="settingsForm"
+  class="flex justify-content-center"
+>
+  <div class="p-4 w-full lg:w-4">
+    <div>
+      <label for="displayName" class="block text-900 font-medium mb-2">Name</label>
+      <input
+        id="displayName"
+        type="text"
+        pInputText
+        class="w-full mb-3"
+        formControlName="displayName"
+      >
+
+      <label for="currency" class="block text-900 font-medium mb-2">Currency</label>
+      <p-dropdown
+        id="currency"
+        class="w-full mb-3"
+        [options]="['USD', 'EUR', 'UAH']"
+        formControlName="currency"
+      ></p-dropdown>
+
+      <label for="darkMode" class="block text-900 font-medium mb-2">Dark Mode</label>
+      <p-inputSwitch
+        id="darkMode"
+        class="w-full mb-3"
+        formControlName="darkMode"
+      ></p-inputSwitch>
+
+      <button
+        pButton
+        pRipple
+        label="Save"
+        class="w-full"
+        (click)="saveSettings()"
+        type="button"
+      ></button>
+    </div>
+  </div>
+</form>
