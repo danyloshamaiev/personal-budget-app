@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {PrimeNGConfig} from 'primeng/api';
 import {Observable} from 'rxjs';
 import {AuthService} from './services/auth.service';
-import {ThemeService} from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +12,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private primengConfig: PrimeNGConfig,
-    private themeService: ThemeService,
     private authService: AuthService
   ) {
     this.isAuthenticated$ = this.authService.isAuthenticated$;
@@ -21,10 +19,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.primengConfig.ripple = true;
-  }
-
-  switchDarkMode() {
-    this.themeService.switchDarkMode();
   }
 
   logout($event: Event) {

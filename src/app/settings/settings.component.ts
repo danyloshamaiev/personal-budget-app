@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 import IUser from '../models/user.model';
 import {SettingsService} from '../services/settings.service';
+import {ThemeService} from '../services/theme.service';
 
 @Component({
   selector: 'app-settings',
@@ -13,18 +14,20 @@ import {SettingsService} from '../services/settings.service';
 export class SettingsComponent implements OnInit {
   public settingsForm: FormGroup;
   public userInfo$: Observable<IUser>;
+  public darkMode$: Observable<boolean>;
   private unsubscribe$: Subject<void>;
 
   constructor(
     private settingsService: SettingsService,
+    private themeService: ThemeService,
     private router: Router
   ) {
     this.settingsForm = new FormGroup({
       displayName: new FormControl(''),
       currency: new FormControl(''),
-      darkMode: new FormControl<boolean>(false),
     });
     this.userInfo$ = this.settingsService.getUserInfo();
+    this.darkMode$ = this.themeService.darkMode$;
     this.unsubscribe$ = new Subject<void>();
   }
 
@@ -39,5 +42,9 @@ export class SettingsComponent implements OnInit {
 
   public saveSettings(): void {
     // this.settingsService.saveUserSettings();
+  }
+
+  public setDarkMode({checked}: {checked: boolean}) {
+    this.themeService.setDarkMode(checked);
   }
 }

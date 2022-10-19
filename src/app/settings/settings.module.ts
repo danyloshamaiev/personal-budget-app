@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputSwitchModule} from 'primeng/inputswitch';
@@ -21,6 +21,7 @@ import {SettingsComponent} from './settings.component';
     DropdownModule,
     InputSwitchModule,
     RippleModule,
+    FormsModule,
   ],
 })
 export class SettingsModule {}

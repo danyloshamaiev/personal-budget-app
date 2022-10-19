@@ -25,7 +25,9 @@
       <p-inputSwitch
         id="darkMode"
         class="w-full mb-3"
-        formControlName="darkMode"
+        [ngModelOptions]="{standalone: true}"
+        [ngModel]="darkMode$ | async"
+        (onChange)="setDarkMode($event)"
       ></p-inputSwitch>
 
       <button
