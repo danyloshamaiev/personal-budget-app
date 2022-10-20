@@ -9,7 +9,6 @@ import {
 import {getDownloadURL, ref, Storage, uploadBytes} from '@angular/fire/storage';
 import {catchError, concatMap, from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../../environments/environment';
 import IUser from '../models/user.model';
 import {AuthService} from './auth.service';
 
