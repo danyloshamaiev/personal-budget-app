@@ -43,6 +43,11 @@ const routes: Routes = [
     redirectTo: '/accounts',
     pathMatch: 'full',
   },
+  {
+    path: '**',
+    redirectTo: '/accounts',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
