@@ -4,6 +4,17 @@
 >
   <div class="p-4 w-full lg:w-4">
     <div>
+      <p-fileUpload
+        mode="basic"
+        accept="image/*"
+        [maxFileSize]="2000000"
+        [customUpload]="true"
+        (uploadHandler)="uploadProfilePhoto($event)"
+        [auto]="true"
+        chooseLabel="Upload Photo"
+        class="w-full block mb-3"
+      ></p-fileUpload>
+
       <label for="displayName" class="block text-900 font-medium mb-2">Name</label>
       <input
         id="displayName"
@@ -16,7 +27,7 @@
       <label for="currency" class="block text-900 font-medium mb-2">Currency</label>
       <p-dropdown
         id="currency"
-        class="w-full mb-3"
+        class="w-full block mb-3"
         [options]="['USD', 'EUR', 'UAH']"
         formControlName="currency"
       ></p-dropdown>
@@ -24,7 +35,7 @@
       <label for="darkMode" class="block text-900 font-medium mb-2">Dark Mode</label>
       <p-inputSwitch
         id="darkMode"
-        class="w-full mb-3"
+        class="w-full block mb-3"
         [ngModelOptions]="{standalone: true}"
         [ngModel]="darkMode$ | async"
         (onChange)="setDarkMode($event)"

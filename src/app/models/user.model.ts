@@ -5,6 +5,6 @@ export default interface IUser {
   password?: string;
   displayName: string;
   currency?: string;
-  photoURL?: string;
+  // photoURL?: string;
   accounts?: IAccount[];
 }

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Observable, Subject, take} from 'rxjs';
-import IUser from '../models/user.model';
 import {SettingsService} from '../services/settings.service';
 import {ThemeService} from '../services/theme.service';
 import {ToastService} from '../services/toast.service';
@@ -52,7 +51,15 @@ export class SettingsComponent implements OnInit {
       });
   }
 
-  public setDarkMode({checked}: {checked: boolean}) {
+  public setDarkMode({checked}: {checked: boolean}): void {
     this.themeService.setDarkMode(checked);
+  }
+
+  public uploadProfilePhoto($event: any): void {
+    this.settingsService
+      .updateProfilePhoto($event.files[0])
+      .subscribe((result) => {
+        console.log(result);
+      });
   }
 }
