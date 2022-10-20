@@ -59,7 +59,9 @@ export class SettingsComponent implements OnInit {
     this.settingsService
       .updateProfilePhoto($event.files[0])
       .subscribe((result) => {
-        console.log(result);
+        this.toast.success({
+          detail: 'You successfully uploaded a new profile photo',
+        });
       });
   }
 }

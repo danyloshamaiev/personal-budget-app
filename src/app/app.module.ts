@@ -6,6 +6,7 @@ import {getStorage, provideStorage} from '@angular/fire/storage';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MessageService} from 'primeng/api';
+import {AvatarModule} from 'primeng/avatar';
 import {ButtonModule} from 'primeng/button';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {RippleModule} from 'primeng/ripple';
@@ -29,6 +30,7 @@ import {AppComponent} from './app.component';
     InputSwitchModule,
     ButtonModule,
     RippleModule,
+    AvatarModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],

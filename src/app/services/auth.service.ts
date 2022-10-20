@@ -1,11 +1,10 @@
-import {Injectable, OnDestroy} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   Auth,
   GoogleAuthProvider,
   FacebookAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
   user,
   signOut,
   authState,
@@ -20,9 +19,9 @@ import {
   doc,
   setDoc,
 } from '@angular/fire/firestore';
-import {EMPTY, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import IUser from '../models/user.model';
-import {delay, map, filter, switchMap} from 'rxjs/operators';
+import {delay, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 import {ToastService} from './toast.service';

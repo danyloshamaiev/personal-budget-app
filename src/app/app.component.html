@@ -4,7 +4,15 @@
     pRipple
     (click)="logout($event)"
     [class.hidden]="!(isAuthenticated$ | async)"
-  >Logout</button>
+  >Logout
+  </button>
+  <p-avatar
+    [image]="(imageURL$ | async) || ''"
+    styleClass="ml-auto"
+    size="xlarge"
+    shape="circle"
+    [class.hidden]="!(isAuthenticated$ | async)"
+  ></p-avatar>
 </div>
 <router-outlet></router-outlet>
 <p-toast position="bottom-center"></p-toast>
