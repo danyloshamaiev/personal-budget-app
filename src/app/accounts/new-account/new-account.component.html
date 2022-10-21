@@ -1,9 +1,26 @@
 <form
   [formGroup]="newAccountForm"
-  class="flex justify-content-center"
 >
   <div class="p-4 w-full lg:w-4">
     <div>
+      <div class="flex flex-row align-items-center justify-content-between mb-3">
+      <button
+        pButton
+        pRipple
+        label="Cancel"
+        class="p-button-secondary p-button-text"
+        routerLink="accounts"
+        type="button"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="Add"
+        icon="pi pi-plus"
+        (click)="addNewAccount()"
+        type="button"
+      ></button>
+      </div>
       <label for="name" class="block text-900 font-medium mb-2">Account name</label>
       <input
         id="name"
@@ -21,16 +38,6 @@
         class="w-full mb-3"
         formControlName="initialBalance"
       >
-
-      <button
-        pButton
-        pRipple
-        label="Add"
-        icon="pi pi-plus"
-        class="w-full"
-        (click)="addNewAccount()"
-        type="button"
-      ></button>
     </div>
   </div>
 </form>

@@ -1,71 +1,76 @@
 <form
   [formGroup]="newTransactionForm"
-  class="flex justify-content-center"
 >
   <div class="p-4 w-full lg:w-4">
-    <div>
-      <label for="sum" class="block text-900 font-medium mb-2">Amount</label>
-      <input
-        id="sum"
-        type="text"
-        pInputText
-        class="w-full mb-3"
-        formControlName="sum"
-      >
-
-      <label for="account" class="block text-900 font-medium mb-2">Account</label>
-      <p-dropdown
-        id="account"
-        class="w-full mb-3"
-        [options]="(accounts$ | async) || []"
-        optionLabel="name"
-        optionValue="id"
-        formControlName="account"
-      ></p-dropdown>
-
-      <label for="category" class="block text-900 font-medium mb-2">Category</label>
-      <input
-        id="category"
-        type="text"
-        pInputText
-        class="w-full mb-3"
-        formControlName="category"
-      >
-
-      <label for="description" class="block text-900 font-medium mb-2">Description</label>
-      <input
-        id="description"
-        type="text"
-        pInputText
-        class="w-full mb-3"
-        formControlName="description"
-      >
-
-      <label for="date" class="block text-900 font-medium mb-2">Date</label>
-      <p-calendar
-        id="date"
-        class="w-full mb-3"
-        formControlName="date"
-      ></p-calendar>
-
-      <label for="notes" class="block text-900 font-medium mb-2">Notes</label>
-      <input
-        id="notes"
-        type="text"
-        pInputText
-        class="w-full mb-3"
-        formControlName="notes"
-      >
-
+    <div class="flex flex-row align-items-center justify-content-between mb-3">
+      <button
+        pButton
+        pRipple
+        label="Cancel"
+        class="p-button-secondary p-button-text"
+        routerLink="accounts"
+        type="button"
+      ></button>
       <button
         pButton
         pRipple
         label="Add"
         icon="pi pi-plus"
-        class="w-full"
         (click)="addNewTransaction()"
         type="button"
       ></button>
     </div>
+    <label for="sum" class="block text-900 font-medium mb-2">Amount</label>
+    <input
+      id="sum"
+      type="text"
+      pInputText
+      class="w-full mb-3"
+      formControlName="sum"
+    >
+
+    <label for="account" class="block text-900 font-medium mb-2">Account</label>
+    <p-dropdown
+      id="account"
+      class="w-full block mb-3"
+      [options]="(accounts$ | async) || []"
+      optionLabel="name"
+      optionValue="id"
+      formControlName="account"
+    ></p-dropdown>
+
+    <label for="category" class="block text-900 font-medium mb-2">Category</label>
+    <input
+      id="category"
+      type="text"
+      pInputText
+      class="w-full mb-3"
+      formControlName="category"
+    >
+
+    <label for="description" class="block text-900 font-medium mb-2">Description</label>
+    <input
+      id="description"
+      type="text"
+      pInputText
+      class="w-full mb-3"
+      formControlName="description"
+    >
+
+    <label for="date" class="block text-900 font-medium mb-2">Date</label>
+    <p-calendar
+      id="date"
+      class="w-full block mb-3"
+      formControlName="date"
+    ></p-calendar>
+
+    <label for="notes" class="block text-900 font-medium mb-2">Notes</label>
+    <input
+      id="notes"
+      type="text"
+      pInputText
+      class="w-full mb-3"
+      formControlName="notes"
+    >
   </div>
 </form>
