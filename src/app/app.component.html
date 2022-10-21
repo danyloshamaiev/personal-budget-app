@@ -1,4 +1,10 @@
-<div class="p-2">
+<div class="p-4 flex flex-row justify-content-between">
+  <p-avatar
+    [image]="(imageURL$ | async) || ''"
+    size="xlarge"
+    shape="circle"
+    [class.hidden]="!(isAuthenticated$ | async)"
+  ></p-avatar>
   <button
     pButton
     pRipple
@@ -6,13 +12,6 @@
     [class.hidden]="!(isAuthenticated$ | async)"
   >Logout
   </button>
-  <p-avatar
-    [image]="(imageURL$ | async) || ''"
-    styleClass="ml-auto"
-    size="xlarge"
-    shape="circle"
-    [class.hidden]="!(isAuthenticated$ | async)"
-  ></p-avatar>
 </div>
 <router-outlet></router-outlet>
 <p-toast position="bottom-center"></p-toast>
