@@ -3,6 +3,7 @@
     [image]="(imageURL$ | async) || ''"
     size="xlarge"
     shape="circle"
+    routerLink="settings"
     [class.hidden]="!(isAuthenticated$ | async)"
   ></p-avatar>
   <button

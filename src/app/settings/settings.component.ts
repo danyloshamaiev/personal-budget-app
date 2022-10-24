@@ -68,4 +68,8 @@ export class SettingsComponent implements OnInit {
         logEvent(this.analytics, 'avatar_updated');
       });
   }
+
+  public cancel(): void {
+    this.router.navigate(['accounts']);
+  }
 }
