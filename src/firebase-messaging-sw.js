@@ -1,9 +1,10 @@
-import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js';
+console.log('TEST')
+import {initializeApp} from 'firebase/app';
 import {
   getMessaging,
   onBackgroundMessage,
   isSupported
-} from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-sw.js';
+} from 'firebase/firebase-messaging-sw';
 
 const app = initializeApp({
   apiKey: 'AIzaSyCy2gtNYfK7c93_Vbv0cIUkeBxgUlHOc80',
@@ -17,7 +18,9 @@ const app = initializeApp({
 
 isSupported().then(isSupported => {
   if (isSupported) {
+    console.log(app);
     const messaging = getMessaging(app);
+    console.log(messaging);
 
     onBackgroundMessage(messaging, ({notification: {title, body, image}}) => {
       self.registration.showNotification(title, {body, icon: image || '/assets/icons/icon-72x72.png'});
