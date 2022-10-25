@@ -3,6 +3,7 @@ import {getAnalytics, provideAnalytics} from '@angular/fire/analytics';
 import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {getAuth, provideAuth} from '@angular/fire/auth';
 import {getFirestore, provideFirestore} from '@angular/fire/firestore';
+import {getMessaging, provideMessaging} from '@angular/fire/messaging';
 import {getStorage, provideStorage} from '@angular/fire/storage';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -29,6 +30,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    provideMessaging(() => getMessaging()),
     ToastModule,
     InputSwitchModule,
     ButtonModule,

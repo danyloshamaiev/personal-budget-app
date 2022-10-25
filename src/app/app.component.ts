@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PrimeNGConfig} from 'primeng/api';
 import {Observable} from 'rxjs';
-import {environment} from '../environments/environment';
 import {AuthService} from './services/auth.service';
+import {MessagingService} from './services/messaging.service';
 import {SettingsService} from './services/settings.service';
 import {ThemeService} from './services/theme.service';
 
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private authService: AuthService,
     private themeService: ThemeService, // For the sake of keeping alive an Observable subscription
+    private messagingService: MessagingService,
     private settingsService: SettingsService
   ) {
     this.isAuthenticated$ = this.authService.isAuthenticated$;
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+    Notification.requestPermission();
   }
 
   logout($event: Event) {
