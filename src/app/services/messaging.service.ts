@@ -18,7 +18,7 @@ export class MessagingService {
       }).then(serviceWorkerRegistration =>
         getToken(messaging, {
           serviceWorkerRegistration,
-          vapidKey: environment.vapidKey
+          vapidKey: environment.firebase.vapidKey
         })
       )).pipe(
       tap(token => console.log('FCM', {token})),
