@@ -1,10 +1,10 @@
 console.log('TEST')
-import {initializeApp} from 'firebase/firebase-app';
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js';
 import {
   getMessaging,
   onBackgroundMessage,
   isSupported
-} from 'firebase/firebase-messaging-sw';
+} from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-sw.js';
 
 const app = initializeApp({
   apiKey: 'AIzaSyCy2gtNYfK7c93_Vbv0cIUkeBxgUlHOc80',
