@@ -14,7 +14,7 @@ export class MessagingService {
     this.token$ = from(
       navigator.serviceWorker.register('firebase-messaging-sw.js', {
         type: 'module',
-        // scope: '__'
+        scope: '__',
       }).then(serviceWorkerRegistration =>
         getToken(messaging, {
           serviceWorkerRegistration,
