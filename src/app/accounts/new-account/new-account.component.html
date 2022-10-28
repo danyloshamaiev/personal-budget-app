@@ -1,43 +1,37 @@
-<form
-  [formGroup]="newAccountForm"
->
-  <div class="p-4 w-full lg:w-4">
-    <div>
-      <div class="flex flex-row align-items-center justify-content-between mb-3">
-      <button
-        pButton
-        pRipple
-        label="Cancel"
-        class="p-button-secondary p-button-text"
-        routerLink="accounts"
-        type="button"
-      ></button>
-      <button
-        pButton
-        pRipple
-        label="Add"
-        icon="pi pi-plus"
-        (click)="addNewAccount()"
-        type="button"
-      ></button>
-      </div>
-      <label for="name" class="block text-900 font-medium mb-2">Account name</label>
-      <input
-        id="name"
-        type="text"
-        pInputText
-        class="w-full mb-3"
-        formControlName="name"
-      >
-
-      <label for="initialBalance" class="block text-900 font-medium mb-2">Initial balance</label>
-      <input
-        id="initialBalance"
-        type="text"
-        pInputText
-        class="w-full mb-3"
-        formControlName="initialBalance"
-      >
-    </div>
+<form [formGroup]="newAccountForm">
+  <div class="flex flex-row align-items-center justify-content-between mb-3">
+    <button
+      pButton
+      pRipple
+      label="Cancel"
+      class="p-button-secondary p-button-text"
+      routerLink="accounts"
+      type="button"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Add"
+      icon="pi pi-plus"
+      (click)="addNewAccount()"
+      type="button"
+    ></button>
   </div>
+  <label for="name" class="block text-900 font-medium mb-2">Account name</label>
+  <input
+    id="name"
+    type="text"
+    pInputText
+    class="w-full mb-3"
+    formControlName="name"
+  >
+
+  <label for="initialBalance" class="block text-900 font-medium mb-2">Initial balance</label>
+  <input
+    id="initialBalance"
+    type="text"
+    pInputText
+    class="w-full mb-3"
+    formControlName="initialBalance"
+  >
 </form>
