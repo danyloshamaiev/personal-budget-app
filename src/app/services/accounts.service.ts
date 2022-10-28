@@ -15,6 +15,7 @@ import {
 } from '@angular/fire/firestore';
 import {concatMap, from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import slugify from 'slugify';
 import {ITransaction} from '../models/transaction.model';
 import {AuthService} from './auth.service';
 
@@ -110,7 +111,7 @@ export class AccountsService {
             'accounts',
             arrayUnion({
               name,
-              id: this.sanitizeId(name),
+              id: slugify(name),
               balance: +initialBalance,
             })
           )
@@ -123,9 +124,5 @@ export class AccountsService {
         );
       })
     );
-  }
-
-  private sanitizeId(accountName: string) {
-    return accountName.toLowerCase().trim().replace(' ', '-');
   }
 }
