@@ -1,9 +1,7 @@
-import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {getToken, Messaging, onMessage} from '@angular/fire/messaging';
-import {concatMap, EMPTY, filter, from, Observable, share, tap} from 'rxjs';
+import {EMPTY, from, Observable, share, tap} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +10,7 @@ export class MessagingService {
   token$: Observable<any> = EMPTY;
   message$: Observable<any> = EMPTY;
 
-  constructor(
-    private messaging: Messaging,
-    private httpClient: HttpClient,
-    private authService: AuthService
-  ) {
+  constructor(private messaging: Messaging) {
     this.token$ = from(
       navigator.serviceWorker
         .register('firebase-messaging-sw.js', {
