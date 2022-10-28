@@ -87,6 +87,9 @@
               "browserTarget": "personal-budget-app:build:development"
             }
           },
+          "options": {
+            "disableHostCheck": true
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
