@@ -110,7 +110,7 @@ export class AccountsService {
             'accounts',
             arrayUnion({
               name,
-              id: name, // TODO: CHANGE
+              id: this.sanitizeId(name),
               balance: +initialBalance,
             })
           )
@@ -123,5 +123,9 @@ export class AccountsService {
         );
       })
     );
+  }
+
+  private sanitizeId(accountName: string) {
+    return accountName.toLowerCase().trim().replace(' ', '-');
   }
 }
