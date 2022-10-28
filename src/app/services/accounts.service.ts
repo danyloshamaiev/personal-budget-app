@@ -111,7 +111,7 @@ export class AccountsService {
             'accounts',
             arrayUnion({
               name,
-              id: slugify(name),
+              id: slugify(name, {lower: true}),
               balance: +initialBalance,
             })
           )
