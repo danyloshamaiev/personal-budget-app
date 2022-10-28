@@ -7,19 +7,20 @@
   pRipple
   label="Add Account"
   icon="pi pi-plus"
-  class="w-full"
+  class="block ml-auto"
   (click)="addAccount()"
 ></button>
-<div
-  class="p-card my-2"
-  *ngFor="let account of accounts$ | async"
-  (click)="openAccount(account.id)"
->
-  <div class="p-card-header p-2">
-    {{account.name}}
-  </div>
-  <div class="p-card-content px-2">
-    {{account.balance}}
+<div class="">
+  <div
+    class="p-card my-2"
+    *ngFor="let account of accounts$ | async"
+    (click)="openAccount(account.id)"
+  >
+    <div class="p-card-header text-lg font-medium p-2">
+      {{account.name}}
+    </div>
+    <div class="p-card-content px-2 py-2">
+      {{account.balance}}
+    </div>
   </div>
 </div>
-
