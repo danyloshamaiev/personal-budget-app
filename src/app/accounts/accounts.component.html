@@ -10,8 +10,9 @@
   class="block ml-auto"
   (click)="addAccount()"
 ></button>
-<div class="">
+<div>
   <div
+    pRipple
     class="p-card my-2"
     *ngFor="let account of accounts$ | async"
     (click)="openAccount(account.id)"
