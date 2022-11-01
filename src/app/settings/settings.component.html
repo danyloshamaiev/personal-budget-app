@@ -37,21 +37,23 @@
       (onChange)="setDarkMode($event)"
     ></p-inputSwitch>
 
-    <button
-      pButton
-      pRipple
-      label="Save"
-      class="w-full mb-3"
-      (click)="saveSettings()"
-      type="button"
-    ></button>
-    <button
-      pButton
-      pRipple
-      label="Cancel"
-      class="w-full p-button-text"
-      (click)="cancel()"
-      type="button"
-    ></button>
+    <div class="lg:flex lg:justify-content-between">
+      <button
+        pButton
+        pRipple
+        label="Save"
+        class="w-full mb-3 lg:mr-4"
+        (click)="saveSettings()"
+        type="button"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="Cancel"
+        class="w-full p-button-text mb-3"
+        (click)="cancel()"
+        type="button"
+      ></button>
+    </div>
   </div>
 </form>
