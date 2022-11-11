@@ -2,7 +2,7 @@
 
 ![Maintaner](https://img.shields.io/badge/maintainer-extrawest.com-blue)
 ![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)
-![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)
+![GitHub release](https://img.shields.io/github/package-json/v/extrawest/angular_personal_budget_app)
 
 ## Project info
 
@@ -13,8 +13,6 @@
 - **Firebase v9.1.0;**
 
 - **@angular/fire v7.4.1;**
-
-(add here short list of main packages that use used in this project)
 
 ## Features
 
@@ -32,13 +30,13 @@
 **1) Clone this repo to your folder:**
 
 ```
-git clone https://github.com/extrawest/personal-budget-app.git
+git clone https://github.com/extrawest/angular_personal_budget_app.git
 ```
 
 **2. Change current directory to the cloned folder:**
 
 ```
-cd personal-budget-app
+cd angular_personal_budget_app
 ```
 
 **3) You must have installed Node.js v18.12.0 or higher. Run in terminal in root project directory:**
