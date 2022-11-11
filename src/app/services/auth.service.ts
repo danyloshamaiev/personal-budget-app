@@ -20,7 +20,7 @@ import {
   doc,
   setDoc,
 } from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
+import {Observable, shareReplay} from 'rxjs';
 import IUser from '../models/user.model';
 import {delay, map} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -44,7 +44,7 @@ export class AuthService {
     private route: ActivatedRoute,
     private toast: ToastService
   ) {
-    this.user$ = user(this.auth);
+    this.user$ = user(this.auth).pipe(shareReplay(1));
     this.usersCollection = collection(this.db, 'users');
     this.isAuthenticated$ = this.user$.pipe(map((user) => !!user));
     this.isAuthenticatedWithDelay$ = this.isAuthenticated$.pipe(delay(1000));

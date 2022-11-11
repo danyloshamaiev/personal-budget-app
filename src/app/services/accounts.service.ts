@@ -13,7 +13,7 @@ import {
   updateDoc,
   where,
 } from '@angular/fire/firestore';
-import {concatMap, from, Observable} from 'rxjs';
+import {concatMap, filter, from, Observable, tap} from 'rxjs';
 import {map} from 'rxjs/operators';
 import slugify from 'slugify';
 import {ITransaction} from '../models/transaction.model';
@@ -30,7 +30,11 @@ export class AccountsService {
       concatMap((user) => {
         const userRef: DocumentReference = doc(this.db, `users/${user?.uid}`);
         return from(getDoc(userRef)).pipe(
-          map((userSnapshot) => userSnapshot.get('accounts'))
+          map((userSnapshot) => {
+            let accounts = userSnapshot.get('accounts');
+            if (accounts === undefined) throw new Error('Cannot get accounts!');
+            return accounts;
+          })
         );
       })
     );

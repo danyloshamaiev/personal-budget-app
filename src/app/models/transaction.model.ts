@@ -3,7 +3,7 @@ export interface ITransaction {
   uid: string;
   category: string;
   description: string;
-  date: any; //TODO: Change it
+  date: any;
   notes?: string;
   sum: number;
   transferFrom?: string;
