@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
-import {Observable, retry, retryWhen, Subject, takeUntil} from 'rxjs';
+import {Observable, retry, Subject, takeUntil} from 'rxjs';
 import {IAccount} from '../models/account.model';
 import {AccountsService} from '../services/accounts.service';
 
@@ -9,7 +9,7 @@ import {AccountsService} from '../services/accounts.service';
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.css'],
 })
-export class AccountsComponent implements OnInit, OnDestroy {
+export class AccountsComponent implements OnDestroy {
   public accounts$: Observable<IAccount[]>;
   public balance$: Observable<number>;
   private unsubscribe$: Subject<void>;
@@ -26,8 +26,6 @@ export class AccountsComponent implements OnInit, OnDestroy {
       .getUserTotalBalance()
       .pipe(takeUntil(this.unsubscribe$));
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
