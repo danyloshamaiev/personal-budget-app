@@ -1,8 +1,14 @@
 import {Component, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
 import {Observable, retry, Subject, takeUntil} from 'rxjs';
 import {IAccount} from '../models/account.model';
 import {AccountsService} from '../services/accounts.service';
+import {loadAccounts} from '../state/accounts/accounts.actions';
+import {
+  selectAccounts,
+  selectTotalBalance,
+} from '../state/accounts/accounts.selectors';
 
 @Component({
   selector: 'app-accounts',
@@ -16,14 +22,16 @@ export class AccountsComponent implements OnDestroy {
 
   constructor(
     private accountsService: AccountsService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {
+    this.store.dispatch(loadAccounts());
     this.unsubscribe$ = new Subject<void>();
-    this.accounts$ = this.accountsService
-      .getUserAccounts()
+    this.accounts$ = this.store
+      .select(selectAccounts)
       .pipe(retry(1), takeUntil(this.unsubscribe$));
-    this.balance$ = this.accountsService
-      .getUserTotalBalance()
+    this.balance$ = this.store
+      .select(selectTotalBalance)
       .pipe(takeUntil(this.unsubscribe$));
   }
 

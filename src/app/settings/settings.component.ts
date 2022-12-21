@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Analytics, logEvent} from '@angular/fire/analytics';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Observable, Subject, take} from 'rxjs';
@@ -18,7 +17,6 @@ export class SettingsComponent implements OnInit {
   private unsubscribe$: Subject<void>;
 
   constructor(
-    private analytics: Analytics,
     private settingsService: SettingsService,
     private themeService: ThemeService,
     private router: Router,
@@ -50,7 +48,6 @@ export class SettingsComponent implements OnInit {
       .updateUserInfo(this.settingsForm.value)
       .subscribe(() => {
         this.toast.success({detail: 'Settings saved successfully'});
-        logEvent(this.analytics, 'username_updated');
       });
   }
 
@@ -65,7 +62,6 @@ export class SettingsComponent implements OnInit {
         this.toast.success({
           detail: 'You successfully uploaded a new profile photo',
         });
-        logEvent(this.analytics, 'avatar_updated');
       });
   }
 

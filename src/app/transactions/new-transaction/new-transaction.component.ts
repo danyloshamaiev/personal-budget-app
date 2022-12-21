@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Analytics, logEvent} from '@angular/fire/analytics';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Observable, Subject, takeUntil} from 'rxjs';
@@ -17,7 +16,6 @@ export class NewTransactionComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void>;
 
   constructor(
-    private analytics: Analytics,
     private accountsService: AccountsService,
     private router: Router
   ) {
@@ -49,7 +47,6 @@ export class NewTransactionComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
         this.router.navigate(['accounts']);
-        logEvent(this.analytics, 'avatar_updated');
       });
   }
 }

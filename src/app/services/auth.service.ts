@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Analytics, setUserId} from '@angular/fire/analytics';
 import {
   Auth,
   GoogleAuthProvider,
@@ -38,7 +37,6 @@ export class AuthService {
 
   constructor(
     private auth: Auth,
-    private analytics: Analytics,
     private db: Firestore,
     private router: Router,
     private route: ActivatedRoute,
@@ -112,7 +110,6 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
     };
-    setUserId(this.analytics, user.id);
     return await setDoc(userRef, userData, {
       merge: true,
     });
