@@ -8,5 +8,7 @@ export const loadAccountsSuccess = createAction(
 );
 export const addAccount = createAction(
   '[Accounts] Add Account',
-  props<{account: IAccount}>()
+  props<{account: Partial<IAccount>}>()
 );
+
+export const addAccountSuccess = createAction('[Accounts] Add Account Success');

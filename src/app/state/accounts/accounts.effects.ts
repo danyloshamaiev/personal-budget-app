@@ -3,7 +3,12 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, EMPTY, mergeMap, tap} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {AccountsService} from '../../services/accounts.service';
-import {loadAccounts, loadAccountsSuccess} from './accounts.actions';
+import {
+  addAccount,
+  addAccountSuccess,
+  loadAccounts,
+  loadAccountsSuccess,
+} from './accounts.actions';
 
 @Injectable()
 export class AccountsEffects {
@@ -24,6 +29,25 @@ export class AccountsEffects {
           catchError(() => EMPTY)
         )
       )
+    )
+  );
+
+  addAccount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(addAccount.type),
+      mergeMap(({account}) => {
+        return (
+          this.accountsService
+            // @ts-ignore
+            .addUserAccount(account.name, +account.initialBalance)
+            .pipe(
+              map(() => ({
+                type: addAccountSuccess.type,
+              })),
+              catchError(() => EMPTY)
+            )
+        );
+      })
     )
   );
 }

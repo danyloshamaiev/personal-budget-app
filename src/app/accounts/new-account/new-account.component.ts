@@ -1,8 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
+import {Actions, ofType} from '@ngrx/effects';
+import {Store} from '@ngrx/store';
 import {Subject, takeUntil} from 'rxjs';
 import {AccountsService} from '../../services/accounts.service';
+import {
+  addAccount,
+  addAccountSuccess,
+} from '../../state/accounts/accounts.actions';
 
 @Component({
   selector: 'app-new-transaction',
@@ -15,7 +21,9 @@ export class NewAccountComponent implements OnInit, OnDestroy {
 
   constructor(
     private accountsService: AccountsService,
-    private router: Router
+    private store: Store,
+    private router: Router,
+    private actions$: Actions
   ) {
     this.newAccountForm = new FormGroup({
       name: new FormControl(''),
@@ -32,14 +40,16 @@ export class NewAccountComponent implements OnInit, OnDestroy {
   }
 
   public addNewAccount(): void {
-    this.accountsService
-      .addUserAccount(
-        this.newAccountForm.value.name,
-        this.newAccountForm.value.initialBalance
-      )
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        this.router.navigate(['accounts']);
-      });
+    this.store.dispatch(
+      addAccount({
+        account: {
+          name: this.newAccountForm.value.name,
+          balance: this.newAccountForm.value.initialBalance,
+        },
+      })
+    );
+    this.actions$.pipe(ofType(addAccountSuccess)).subscribe(() => {
+      this.router.navigate(['accounts']);
+    });
   }
 }
